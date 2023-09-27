@@ -14,6 +14,8 @@ class Images {
   static const String updatePassword = 'assets/images/update_password.png';
   static const String federalBank = 'assets/images/federal_bank.png';
   static const String africaBank = 'assets/images/africa_bank.png';
+  static const String videoCalBanner = 'assets/images/video_call_banar.jpg';
+  static const String workingTime = 'assets/images/working_time.jpg';
   
 
 

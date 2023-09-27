@@ -44,7 +44,7 @@ class OnboardingScreen extends StatelessWidget {
                   flex: 3,
                   child: Obx(
                     () => Container(
-                      margin: EdgeInsets.symmetric(horizontal: 30),
+                      margin:const EdgeInsets.symmetric(horizontal: 30),
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(20.r)),
                       child: ClipRRect(
@@ -73,36 +73,34 @@ class OnboardingScreen extends StatelessWidget {
               Expanded(
                   flex: 2,
                   child: SingleChildScrollView(
-                    child: Container(
-                      child: Column(
-                        children: [
-                          SizedBox(height: 20.h),
-                          Obx(
-                            () => Text(
-                              '${title[currentIndex.toInt()]}',
-                              style: TextStyles.normalTextStyle(),
-                            ),
+                    child: Column(
+                      children: [
+                        SizedBox(height: 20.h),
+                        Obx(
+                          () => Text(
+                            '${title[currentIndex.toInt()]}',
+                            style: TextStyles.normalTextStyle(),
                           ),
-                          SizedBox(height: 20.h),
-                          Text('${description[currentIndex.toInt()]}',
-                              textAlign: TextAlign.center,
-                              style: TextStyles.styleText()),
-                          SizedBox(height: 25.h),
-                          Obx(() => SubmitButton(
-                              onPressed: () {
-                                if (currentIndex == title.length - 1) {
-                                  Get.to(() => LoginScreen());
-                                } else {
-                                  currentIndex + 1;
-                                }
-                              },
-                              text: currentIndex == title.length - 1
-                                  ? "Get Started"
-                                  : "Next",
-                              bgColor: ColorResources.colorWhite,
-                              textColor: ColorResources.colorBlack))
-                        ],
-                      ),
+                        ),
+                        SizedBox(height: 20.h),
+                        Text('${description[currentIndex.toInt()]}',
+                            textAlign: TextAlign.center,
+                            style: TextStyles.styleText()),
+                        SizedBox(height: 25.h),
+                        Obx(() => SubmitButton(
+                            onPressed: () {
+                              if (currentIndex == title.length - 1) {
+                                Get.to(() =>const LoginScreen());
+                              } else {
+                                currentIndex + 1;
+                              }
+                            },
+                            text: currentIndex == title.length - 1
+                                ? "Get Started"
+                                : "Next",
+                            bgColor: ColorResources.colorWhite,
+                            textColor: ColorResources.colorBlack))
+                      ],
                     ),
                   )),
             ],

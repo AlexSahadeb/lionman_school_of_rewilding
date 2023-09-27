@@ -8,7 +8,7 @@ import 'package:lionman_school_of_rewilding/screen/auth/signup/teacher.dart';
 import 'package:lionman_school_of_rewilding/widgets/appbar.dart';
 
 class SignUpScreen extends StatefulWidget {
-  SignUpScreen({super.key});
+ const SignUpScreen({super.key});
 
   @override
   State<SignUpScreen> createState() => _SignUpScreenState();

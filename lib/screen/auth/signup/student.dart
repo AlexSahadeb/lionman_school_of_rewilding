@@ -3,7 +3,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:lionman_school_of_rewilding/global/constants/color_resources.dart';
 import 'package:lionman_school_of_rewilding/global/style/text_styles.dart';
-import 'package:lionman_school_of_rewilding/screen/auth/signup/verification_screen.dart';
+import 'package:lionman_school_of_rewilding/screen/auth/signup/student_verification_screen.dart';
+import 'package:lionman_school_of_rewilding/screen/auth/signup/teacher_verification_screen.dart';
 import 'package:lionman_school_of_rewilding/widgets/custom_text_field.dart';
 import 'package:lionman_school_of_rewilding/widgets/submit_Button.dart';
 
@@ -164,7 +165,7 @@ class _StudentsState extends State<Students> {
                   SubmitButton(
                     bgColor: ColorResources.colorWhite,
                     onPressed: () {
-                      Get.to(() => VerificationScreen());
+                      Get.to(() =>const StudentVerificationScreen());
                     },
                     text: 'Sign Up',
                     textColor: ColorResources.colorBlack,

@@ -2,18 +2,21 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:lionman_school_of_rewilding/controller/auth_controller.dart';
 import 'package:lionman_school_of_rewilding/global/constants/color_resources.dart';
 import 'package:lionman_school_of_rewilding/global/constants/images.dart';
 import 'package:lionman_school_of_rewilding/global/style/box_decoration.dart';
 import 'package:lionman_school_of_rewilding/global/style/text_styles.dart';
-import 'package:lionman_school_of_rewilding/screen/auth/login/forget_password.dart';
+import 'package:lionman_school_of_rewilding/screen/auth/login/teacher_forget_password.dart';
 import 'package:lionman_school_of_rewilding/screen/auth/signup/signup_screen.dart';
-import 'package:lionman_school_of_rewilding/screen/dashboard/deshboard.dart';
+import 'package:lionman_school_of_rewilding/screen/teacher_dashboard/teacher_deshboard.dart';
 import 'package:lionman_school_of_rewilding/widgets/custom_text_field.dart';
 import 'package:lionman_school_of_rewilding/widgets/submit_Button.dart';
 
+import '../../student_dashboard/student_dashboard/student_deshboard.dart';
+
 class LoginScreen extends StatefulWidget {
-  LoginScreen({super.key});
+  const LoginScreen({super.key});
 
   @override
   State<LoginScreen> createState() => _LoginScreenState();
@@ -26,6 +29,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
   bool _isvisible = true;
   final formKey = GlobalKey<FormState>();
+  late String email, password;
 
   @override
   Widget build(BuildContext context) {
@@ -66,8 +70,27 @@ class _LoginScreenState extends State<LoginScreen> {
                         ),
                         CustomTextField(
                           controller: emailController,
-                          validator: (p0) {},
-                          onChanged: (value) {},
+                          validator: (value) {
+                            if (value!.isEmpty) {
+                              return "Email can not be empty";
+                            }
+                            if (!RegExp(
+                                    "^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+.[a-z]")
+                                .hasMatch(value)) {
+                              return 'Please a valid email';
+                            }
+                            return null;
+                          },
+                          onChanged: (value) {
+                            setState(() {
+                              print("typing email ===>>> $value");
+                            });
+                          },
+                          onSaved: (String? value) {
+                            email = value!;
+                          },
+
+                      
                           hintText: "Enter your mail",
                           filled: true,
                           fillColor: ColorResources.textfilColor,
@@ -81,8 +104,20 @@ class _LoginScreenState extends State<LoginScreen> {
                         ),
                         CustomTextField(
                           controller: passwordController,
-                          validator: (p0) {},
-                          onChanged: (value) {},
+                          validator: (value) {
+                            if (value!.isEmpty) {
+                              return "password can not be empty";
+                            }
+                            return null;
+                          },
+                          onChanged: (value) {
+                            setState(() {
+                              print("typing email ===>>> $value");
+                            });
+                          },
+                          onSaved: (String? value) {
+                            password = value!;
+                          },
                           hintText: "Enter your password",
                           filled: true,
                           obscureText: _isvisible,
@@ -110,7 +145,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   alignment: Alignment.centerRight,
                   child: GestureDetector(
                     onTap: () {
-                      Get.to(() => ForgetScreen());
+                      Get.to(() => const TeacherForgetScreen());
                     },
                     child:
                         Text("Forget Password", style: TextStyles.styleText()),
@@ -122,7 +157,16 @@ class _LoginScreenState extends State<LoginScreen> {
                 SubmitButton(
                   bgColor: ColorResources.colorWhite,
                   onPressed: () {
-                    Get.to(() => Deshboard());
+                   Get.to(() =>const StudentDeshboard());
+                    // if (formKey.currentState!.validate()) {
+                    //   final AuthController authController =
+                    //       Get.put(AuthController());
+                    //   authController.login(
+                    //       email: emailController.text.trim(),
+                    //       password: passwordController.text.trim(),
+                    //       context: context);
+                    //   // Get.to(() => Deshboard());
+                    // }
                   },
                   text: 'Log In',
                   textColor: ColorResources.colorBlack,
@@ -143,7 +187,7 @@ class _LoginScreenState extends State<LoginScreen> {
                               style: TextStyles.extraSmallBoldTextStyle(),
                               recognizer: TapGestureRecognizer()
                                 ..onTap = () => Get.to(
-                                      () => SignUpScreen(),
+                                      () => const SignUpScreen(),
                                     ))
                         ]),
                   ),

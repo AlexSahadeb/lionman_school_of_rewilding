@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:lionman_school_of_rewilding/global/constants/color_resources.dart';
 
+// ignore: must_be_immutable
 class CustomTextField extends StatelessWidget {
   TextEditingController? controller;
   TextInputType? keyboardType;
@@ -9,6 +10,7 @@ class CustomTextField extends StatelessWidget {
   bool obscureText;
   final ValueChanged<String>? onChanged;
   String? Function(String?)? validator;
+  String? Function(String?)? onSaved;
   String? hintText;
   Widget? suffixIcon;
   bool? filled;
@@ -17,6 +19,7 @@ class CustomTextField extends StatelessWidget {
     Key? key,
     this.controller,
     this.onChanged,
+    this.onSaved,
     this.validator,
     this.obscureText = false,
     this.keyboardType,
@@ -32,10 +35,12 @@ class CustomTextField extends StatelessWidget {
       controller: controller,
       validator: validator,
       onChanged: onChanged,
+      onSaved: onSaved,
       textAlignVertical: TextAlignVertical.center,
       obscureText: obscureText,
       keyboardType: keyboardType,
       decoration: InputDecoration(
+          contentPadding: const EdgeInsets.symmetric(horizontal: 20),
           border: OutlineInputBorder(
               borderRadius: BorderRadius.circular(30.r),
               borderSide: BorderSide.none),
@@ -44,7 +49,7 @@ class CustomTextField extends StatelessWidget {
           filled: filled,
           fillColor: fillColor,
           hintStyle: TextStyle(
-            fontSize: 12.sp,
+            fontSize: 14.sp,
             color: ColorResources.colorWhite,
           ),
           suffixIcon: suffixIcon),
